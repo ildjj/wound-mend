@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wound Mend - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Wound Mend</h1>
+        <nav>
+            <a href="assessment.html">📝 New Assessment</a>
+            <a href="tracking.html">📊 Wound Tracking</a>
+            <a href="healing-analysis.html">📈 Healing Analysis</a>
+            <a href="wbp.html">📖 WBP Guide</a>
+        </nav>
+        </button>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Wound Mend</h2>
+            <p>A private platform to track, assess, and manage wounds efficiently using the latest Wound Bed Preparation (WBP) 2021 Paradigm.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Wound Mend | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wound Assessment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Wound Assessment</h1>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="tracking.html">📊 Wound Tracking</a>
+            <a href="healing-analysis.html">📈 Healing Analysis</a>
+            <a href="wbp.html">📖 WBP Guide</a>
+        </nav>
+    </header>
+
+    <main>
+        <form id="woundForm">
+            <h2>Patient Details</h2>
+            <label for="mrn">Patient MRN:</label>
+            <input type="text" id="mrn" required>
+
+            <h2>Wound Type & Stage</h2>
+            <label for="woundType">Wound Type:</label>
+            <select id="woundType" onchange="updateStages()">
+                <option value="Pressure Injuries">Pressure Injuries</option>
+                <option value="Diabetic Foot">Diabetic Foot</option>
+                <option value="Skin Tears">Skin Tears</option>
+                <option value="Infected Surgical Wound">Infected Surgical Wound</option>
+                <option value="Atypical Wound">Atypical Wound</option>
+                <option value="Burn">Burn</option>
+                <option value="Necrotizing Fasciitis">Necrotizing Fasciitis</option>
+                <option value="Trauma">Trauma</option>
+            </select>
+
+            <label for="woundStage">Wound Stage:</label>
+            <select id="woundStage"></select>
+
+            <h2>Wound Location & Size</h2>
+            <label for="woundLocation">Location:</label>
+            <input type="text" id="woundLocation" placeholder="e.g. Left heel">
+
+            <label for="woundLength">Dimensions (cm):</label>
+            <input type="number" id="woundLength" placeholder="Length" oninput="calculateArea()">
+            <input type="number" id="woundWidth" placeholder="Width" oninput="calculateArea()">
+            <input type="number" id="woundDepth" placeholder="Depth">
+            <p><strong>Wound Area:</strong> <span id="woundArea">0</span> cm²</p>
+
+            <h2>Undermining & Tunneling</h2>
+            <label for="underminingSize">Undermining Size (cm):</label>
+            <input type="number" id="underminingSize">
+            <label for="underminingLocation">Undermining Location (Clock Format):</label>
+            <input type="text" id="underminingLocation" placeholder="e.g. 3 o'clock">
+
+            <label for="tunnelingSize">Tunneling Size (cm):</label>
+            <input type="number" id="tunnelingSize">
+            <label for="tunnelingLocation">Tunneling Location (Clock Format):</label>
+            <input type="text" id="tunnelingLocation" placeholder="e.g. 9 o'clock">
+
+            <h2>Wound Bed & Edges</h2>
+            <label for="granulation">Granulation (%):</label>
+            <input type="number" id="granulation" min="0" max="100">
+            <label for="epithelialization">Epithelialization (%):</label>
+            <input type="number" id="epithelialization" min="0" max="100">
+            <label for="slough">Slough (%):</label>
+            <input type="number" id="slough" min="0" max="100">
+            <label for="necrosis">Necrosis (%):</label>
+            <input type="number" id="necrosis" min="0" max="100">
+
+            <h2>Periwound Condition</h2>
+            <select id="periwound">
+                <option value="Normal">Normal</option>
+                <option value="Maceration">Maceration</option>
+                <option value="Rash">Rash</option>
+                <option value="Fragile">Fragile</option>
+                <option value="Edematous">Edematous</option>
+                <option value="Cellulitis">Cellulitis</option>
+            </select>
+
+            <h2>Exudate & Infection</h2>
+            <label for="exudateLevel">Exudate Level:</label>
+            <select id="exudateLevel">
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+            </select>
+
+            <fieldset>
+                <legend>NERDS Criteria</legend>
+                <label><input type="checkbox" id="nerds1"> Non-healing Wound</label>
+                <label><input type="checkbox" id="nerds2"> Increased Exudate</label>
+                <label><input type="checkbox" id="nerds3"> Red & Friable Tissue</label>
+                <label><input type="checkbox" id="nerds4"> Debris in Wound</label>
+                <label><input type="checkbox" id="nerds5"> Smell/Odor</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>STONEES Criteria</legend>
+                <label><input type="checkbox" id="stonees1"> Size Increasing</label>
+                <label><input type="checkbox" id="stonees2"> Temperature Increase</label>
+                <label><input type="checkbox" id="stonees3"> Osseous Exposure</label>
+                <label><input type="checkbox" id="stonees4"> New Areas of Breakdown</label>
+                <label><input type="checkbox" id="stonees5"> Erythema/Edema</label>
+                <label><input type="checkbox" id="stonees6"> Exudate Increase</label>
+                <label><input type="checkbox" id="stonees7"> Smell/Odor</label>
+            </fieldset>
+
+            <h2>Treatment & Dressing</h2>
+            <label for="dressing">Dressing Applied:</label>
+            <input type="text" id="dressing">
+            <label for="cleansingSolution">Cleansing Solution:</label>
+            <input type="text" id="cleansingSolution">
+
+            <label for="npwt">Negative Pressure Wound Therapy (NPWT):</label>
+            <select id="npwt">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+
+            <label for="offloading">Offloading:</label>
+            <select id="offloading">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+
+            <h2>Progress Notes & Next Steps</h2>
+            <textarea id="progressNotes" placeholder="Enter progress notes here..."></textarea>
+
+            <h2>Photo Upload</h2>
+            <input type="file" id="woundImage" accept="image/*">
+
+            <button type="submit">Save Assessment</button>
+        </form>
+    </main>
+
+  </body><script src="script.js"></script>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wound Mend - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Patient Dashboard</h1>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="assessment.html">📝 New Assessment</a>
+            <a href="tracking.html">📊 Wound Tracking</a>
+            <a href="healing-analysis.html">📈 Healing Analysis</a>
+            <a href="wbp.html">📖 WBP Guide</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Patient List</h2>
+        <table id="patientTable">
+            <thead>
+                <tr>
+                    <th>MRN</th>
+                    <th>Wound Type</th>
+                    <th>Wound Location</th>
+                    <th>Last Updated</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be loaded here dynamically -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>© 2024 Wound Mend | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wound Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Wound Tracking</h1>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="dashboard.html">📋 Patient Dashboard</a>
+            <a href="assessment.html">📝 New Assessment</a>
+            <a href="healing-analysis.html">📈 Healing Analysis</a>
+            <a href="wbp.html">📖 WBP Guide</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Patient Wound Progress</h2>
+        <table id="trackingTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Wound Area (cm²)</th>
+                    <th>Granulation (%)</th>
+                    <th>Exudate Level</th>
+                    <th>Photo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be loaded dynamically -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>© 2024 Wound Mend | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Healing Analysis</h1>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="dashboard.html">📋 Patient Dashboard</a>
+            <a href="tracking.html">📊 Wound Tracking</a>
+            <a href="assessment.html">📝 New Assessment</a>
+            <a href="wbp.html">📖 WBP Guide</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Wound Healing Trends</h2>
+        <canvas id="healingChart"></canvas>
+    </main>
+
+    <footer>
+        <p>© 2024 Wound Mend | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wound Bed Preparation (WBP) 2021</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Wound Bed Preparation (WBP) 2021</h1>
+        <nav>
+            <a href="index.html">🏠 Home</a>
+            <a href="dashboard.html">📋 Patient Dashboard</a>
+            <a href="tracking.html">📊 Wound Tracking</a>
+            <a href="healing-analysis.html">📈 Healing Analysis</a>
+            <a href="assessment.html">📝 New Assessment</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Treat the Cause</h2>
+            <p>Address the underlying conditions affecting wound healing, such as pressure relief, blood flow, and comorbidities.</p>
+        </section>
+
+        <section>
+            <h2>Patient-Centered Concerns</h2>
+            <p>Consider pain management, lifestyle adjustments, and the patient’s overall health condition.</p>
+        </section>
+
+        <section>
+            <h2>Wound Type</h2>
+            <ul>
+                <li><strong>Healable:</strong> Wounds expected to heal with proper care.</li>
+                <li><strong>Maintenance:</strong> Wounds requiring long-term management due to underlying conditions.</li>
+                <li><strong>Non-Healable:</strong> Wounds that will not heal due to irreversible causes.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Good Wound Care</h2>
+
+            <h3>Debridement</h3>
+            <p>Removal of dead, damaged, or infected tissue to improve wound healing.</p>
+
+            <h3>Infection & Inflammation Control</h3>
+            <p>Use of antibiotics, antiseptics, and proper dressings to control bacterial growth and inflammation.</p>
+
+            <h3>Moisture Balance</h3>
+            <p>Ensuring the wound is neither too dry nor too moist for optimal healing.</p>
+
+            <h3>Edges</h3>
+            <p>Promoting healthy wound edges to encourage proper closure and reduce the risk of chronic wounds.</p>
+        </section>
+
+        <section>
+            <h2>Evaluation</h2>
+            <p>Regular reassessment to ensure treatment effectiveness and make necessary adjustments.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Wound Mend | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
